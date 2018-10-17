@@ -1,0 +1,109 @@
+Star Wars Game Pseudo Code
+==========================
+
+1. Create a character object prototype that allows me to quickly assign values to each of the 10 playable characters.
+2. Allow these objects to be moved between a character select object, a enemy field object, a battlefield object 
+(for active enemy), and graveyard object. 
+3. Each  field/container object should have a corresponding div/row with associated id
+4. Adding each field object should change styling to indicate place in game (waiting to fight, in battle, etc).
+5. Battle stats should be different that selector stats. This way the original character stats are left 
+untouched but the battle stats on the character are affected.
+Can add the booleans wasSelected, battleStart, isWaiting, inBattle, & hasLost for both CPU and user.  
+4 enemies are choosen using their .length value and math.random. Boolean value wasSelected should be set to no by default
+but activated once they are choosen to be an enemy.
+
+test booleans against if statements to change states/ move players from fields
+set booleans with if conditionals. and call functions to set those booleans based on object values.
+
+
+mouse over color change and sound during character select
+character name sound plays once character is selected. 
+"time to fight" +  [character name sound] once each enemy character is placed on battlefield
+
+boolean values should be set to default for all objects once the  game is restarted. 
+
+all characters should be returned to the character select array  from graveyard and any other field array once game is restarted.
+
+
+
+6.Each 
+These characters can then be sent to the graveyard  and restore during a new game
+without having to add a bunch of redundant code. 
+
+
+ For Example:
+function character(name, att, cnt, hp, imgUrl){
+    this.name = name;
+    this.att = att;
+    this.cnt = cnt;
+    this.hp = hp;
+    this.imgUrl = imgUrl;
+
+
+
+}
+
+var obiwan = character("Obi-Wan", 30, 50, 120, "/HomeworkWeek4/unit-4-game/assets/img/OBIWANKENOBI.jpg");
+//(do this for the other 9 characters)
+//then I should be able to type
+ console.log(obiwan instanceOf character)
+
+ true
+
+
+//and then type
+console.log(obiwan)
+obiwan{
+    name:Obi-Wan
+    att: 30
+    CNT: 50
+    HP: 120
+    imgUrl:"/HomeworkWeek4/unit-4-game/assets/img/OBIWANKENOBI.jpg"
+
+
+}
+
+
+    funtion battleReady{
+
+character.battleStrength = Object.ATT
+character.battleCounterAtt = Object.CNT
+character.battleHP = Object.HP
+    }
+
+
+var characterselect = [
+    obiwan,
+    leia,
+    luke,
+    chewy,
+    ...,
+    ...,
+]
+
+
+var enemyField = []
+
+var battleGround = []
+ 
+var playerField = []
+var graveYard = []
+
+
+///found on stack overflow how to vacate items from one array to another. 
+
+for(var i = 0; i < array1.length; i++) {
+  array2.push(array1[i]);
+  array1.splice(i, 1);
+  i--; //decrement i IF we remove an item
+}
+
+console.log(array1); //[]
+console.log(array2); //[1, 2, 3, 4, 5]
+
+
+use
+ $("#id").effect("shake", {times:2}, 100) 
+ 
+ to visually represent user being attacked. 
+
