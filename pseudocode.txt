@@ -103,7 +103,7 @@ console.log(array2); //[1, 2, 3, 4, 5]
 
 
 use
- $("#id").effect("shake", {times:2}, 100) 
+ $("#id").effect("shake", {times:2}, 100)  
  
  to visually represent user being attacked. 
 
