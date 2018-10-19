@@ -1,5 +1,27 @@
 Star Wars Game Pseudo Code
 ==========================
+UX
+=====
+1. Welcome/instructions Modal on first page load. Also Invokable by pressing C3PO / R2D2 Help Button. 
+
+2. Character Select Screen (array)
+
+3. Player Character field (array)
+
+4. Staged Enemies field (array)
+
+5. Current Enemy field (array)
+
+6. Grave Yard Field. (array)
+
+
+
+
+
+
+    
+
+
 
 1. Create a character object prototype that allows me to quickly assign values to each of the 10 playable characters.
 2. Allow these objects to be moved between a character select object, a enemy field object, a battlefield object 
@@ -31,6 +53,7 @@ These characters can then be sent to the graveyard  and restore during a new gam
 without having to add a bunch of redundant code. 
 
 
+
  For Example:
 function character(name, att, cnt, hp, imgUrl){
     this.name = name;
@@ -46,7 +69,7 @@ function character(name, att, cnt, hp, imgUrl){
 var obiwan = character("Obi-Wan", 30, 50, 120, "/HomeworkWeek4/unit-4-game/assets/img/OBIWANKENOBI.jpg");
 //(do this for the other 9 characters)
 //then I should be able to type
- console.log(obiwan instanceOf character)
+ console.log(obiwan instanceof character)
 
  true
 
@@ -107,3 +130,38 @@ use
  
  to visually represent user being attacked. 
 
+
+
+use typeof with loop to enforce strict type checking on items in object.
+var numberControl = 1;
+numsValid = false;
+
+    if(typeof numberControl === typeof character.att && typeof number === typeof character.cnt && typeof number === typeof character.hp){
+
+        numsValid = true;
+
+    }
+
+    else{
+
+
+        alert("error. Numeric type check failed")
+        console.log("numeric type check failed.");
+    }
+
+
+var booleanControl = true;
+var boolValid = false;
+
+    if (typeof booleanControl === character.isDarkside){
+
+        boolValid = true;
+
+
+    } else {
+
+        alert("error. Boolean type check failed.")
+        console.log("Boolean type check failed.");
+
+
+    }

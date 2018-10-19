@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Star Wars RPG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- MODAL MAGIC -->
+    <div class="modal modal-lg" tabindex="-1" role="dialog" id="welcome_message">
+        <audio id="welcomeAudio">
+            <source src="assets/mp3/Star Wars short intro.mp3" type="audio/mp3" />
+        </audio>
+        <audio id="welcome_modal_close_audio">
+            <source src="assets/mp3/Star Wars Blaster Sound Effect.mp3" type="audio/mp3" />
+        </audio>
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Welcome To The Star Wars RPG! </h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2>Instructions:</h2>
+                    <p>Pick a character and then the cpu will randomly select 4 other characters for you to join into
+                        battle.</p>
+                    <p>You will then need to use your reasoning and logic skills to attack in an order that will ensure
+                        victory. </p>
+                    <p>Good luck, and may the force be with you!</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ycCAHYvAUl4" frameborder="0"
+                        allow="autoplay; encrypted-media" allowfullscreen id="welcomevideo"></iframe>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="helperBots">
+        <h1>Welcome to The Star Wars Game</h1>
+        <h2>This is a div for testing purposes</h2>
+        <img class="helper" src="assets/img/C3PO.jpg" id="c3po">
+        <img class="helper" src="assets/img/R2D2.jpg" id="r2d2">
+    </div>
+
+
+
+
+
+
+
+
+    <script src="assets/js/game.js"></script>
+
+</body>
+
+</html>
