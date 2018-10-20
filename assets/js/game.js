@@ -3,6 +3,15 @@
 /////////////////////////////////////////////////////////
 function welcome() {
   $("#welcome_message").modal("show");
+}
+
+function help() {
+  $("#help_modal").modal("show");
+  var r2Audio = document.getElementById("r2Audio");
+  r2Audio.play();
+}
+
+function themeAudio() {
   var starWarsTheme = document.getElementById("welcomeAudio");
   starWarsTheme.play();
 
@@ -14,19 +23,31 @@ function welcome() {
     //this allows you to set how many seconds short the audio will play vs the real duration.
     if (t > starWarsTheme.duration - 10) {
       starWarsTheme.pause();
+      darthMusic();
       //This alert gives you the time (in seconds) that the audio stopped.
       // alert(t);
     }
+
+    function darthMusic() {
+      darthVaderTheme = document.getElementById("darth-music");
+      darthVaderTheme.play();
+    }
   });
 }
+welcome();
 
-function modalclosebutton() {
-  var modalcloseaudio = document.getElementById("modal_close_audio");
+$("#welcome-close").on("click", function() {
+  themeAudio();
+});
 
-  $(".close").on("click", function() {
-    modalcloseaudio.play();
-  });
-}
+$("#c3p0").on("click", function() {
+  help();
+});
+
+$("#r2d2").on("click", function() {
+  help();
+});
+
 /////////////////////////////////////////////////////
 ///Global Variables, Prototypes, and Constructors////
 ////////////////////////////////////////////////////
@@ -130,6 +151,16 @@ var darthvader = new character(
   "../img/darthvader.jpg"
 );
 
+var bobafett = new character(
+  "Boba Fett",
+  45,
+  35,
+  120,
+  true,
+  "bobafett",
+  "../img/bobafett.jpg"
+);
+
 function characterCheck(player) {
   console.log(player instanceof character);
   console.log(player);
@@ -141,58 +172,58 @@ function characterCheck(player) {
 
 //Typechecking Global Variables
 
-var numberControl = 1;
-var booleanControl = false;
-var stringControl = "";
-var numsValid = false;
-var boolValid = false;
-var stringValid = false;
+// var numberControl = 1;
+// var booleanControl = false;
+// var stringControl = "";
+// var numsValid = false;
+// var boolValid = false;
+// var stringValid = false;
 
-//Typechecking functions
-function checkNums(character) {
-  if (
-    typeof numberControl === typeof character.att &&
-    typeof number === typeof character.cnt &&
-    typeof number === typeof character.hp
-  ) {
-    numsValid = true;
-  } else {
-    alert("Error! Numeric type check failed");
-    console.log("numeric type check failed.");
-  }
-}
+// //Typechecking functions
+// function checkNums(character) {
+//   if (
+//     typeof numberControl === typeof character.att &&
+//     typeof number === typeof character.cnt &&
+//     typeof number === typeof character.hp
+//   ) {
+//     numsValid = true;
+//   } else {
+//     alert("Error! Numeric type check failed");
+//     console.log("numeric type check failed.");
+//   }
+// }
 
-function checkBools(character) {
-  if (typeof booleanControl === character.isDarkside) {
-    boolValid = true;
-  } else {
-    alert("Error! Boolean type check failed.");
-    console.log("Boolean type check failed.");
-  }
-}
+// function checkBools(character) {
+//   if (typeof booleanControl === character.isDarkside) {
+//     boolValid = true;
+//   } else {
+//     alert("Error! Boolean type check failed.");
+//     console.log("Boolean type check failed.");
+//   }
+// }
 
-function checkBools(character) {
-  if (typeof booleanControl === character.name) {
-    stringValid = true;
-  } else {
-    alert("Error! String type check failed.");
-    console.log("String type check failed.");
-  }
-}
+// function checkBools(character) {
+//   if (typeof booleanControl === character.name) {
+//     stringValid = true;
+//   } else {
+//     alert("Error! String type check failed.");
+//     console.log("String type check failed.");
+//   }
+// }
 
-function characterCheck(player) {
-  console.log(player instanceof character);
-  console.log(player);
-}
+// function characterCheck(player) {
+//   console.log(player instanceof character);
+//   console.log(player);
+// }
 
-var cCheckLength = charselect.length;
-for (var i = 0; i < cCheckLength; i++) {
-  console.log(charselect[i]);
-  //Do something
-  charname = charselect[i].name;
+// // var cCheckLength = charselect.length;
+// for (var i = 0; i < cCheckLength; i++) {
+//   console.log(charselect[i]);
+//   //Do something
+//   charname = charselect[i].name;
 
-  characterCheck(charname);
-}
+//   characterCheck(charname);
+// }
 
 //////////////////////////////////////////////////////////
 ///////Array Population / Vacation Functions ////////////
@@ -202,7 +233,7 @@ for (var i = 0; i < cCheckLength; i++) {
 //Siths to upper indexes so that charselect function logic
 ///can be based on this initialzed index
 ///for example Jedis will be on 0-5
-///siths will be on
+///siths will be on 6-9
 var charselect = [
   obiwan,
   leia,
@@ -212,24 +243,24 @@ var charselect = [
   yoda,
   stormtrooper,
   darthmaul,
-  darthvader
+  darthvader,
+  bobafett
 ];
 
-for (var i = 0; i < array1.length; i++) {
-  array2.push(array1[i]);
-  array1.splice(i, 1);
-  i--; //decrement i IF we remove an item
+var enemyInBattle = [];
+
+var enemyField = [];
+
+var playerField = [];
+
+///////////////////////////////
+//function  possibly `1used as part of restart
+function vacate(array1, array2) {
+  for (var i = 0; i < array1.length; i++) {
+    array2.push(array1[i]);
+    array1.splice(i, 1);
+    i--; //decrement i IF we remove an item
+  }
 }
 
-//////////////////////////////////////////////////////
-////////Button Magic//////////////////////////////
 /////////////////////////////////////////////////////
-
-//needed to create a user interaction to test audio/modal since new chrome policy
-//prevents audio autoplay without user interaction
-modalclosebutton();
-
-$("#helperBots").on("click", function() {
-  welcome();
-  characterCheck(obiwan);
-});
