@@ -1,4 +1,56 @@
-#welcome_message {
-  width: 750px;
-  margin: auto;
+body {
+  background-image: url("../img/jpeg.jpg");
+  background-size: cover;
+}
+
+.title-element {
+  background-color: #cb6f33;
+  color: white;
+}
+
+.description {
+  background-color: #fbe6cf;
+  color: #5ba16e;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.win-loss-box {
+  color: #3cb2bc;
+  background-color: #3afefd;
+}
+
+.random-box {
+  background-color: #53c987;
+  color: #7d4286;
+}
+
+.current-score {
+  background-color: #1fa397;
+  color: white;
+}
+
+.crystal-1 {
+  height: 200px;
+  width: 200px;
+  background-image: url("../img/crystal1.jpg");
+  background-size: cover;
+}
+.crystal-2 {
+  height: 200px;
+  width: 200px;
+  background-image: url("../img/crystal2.jpg");
+  background-size: cover;
+}
+.crystal-3 {
+  height: 200px;
+  width: 200px;
+  background-image: url("../img/crystal3.jpg");
+  background-size: cover;
+}
+.crystal-4 {
+  height: 200px;
+  width: 200px;
+  background-image: url("../img/crystal4.jpg");
+  background-size: cover;
 }

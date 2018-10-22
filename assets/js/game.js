@@ -1,266 +1,277 @@
-//////////////////////////////////////////////////////////
-////Modal Stuff///////////////////////////////////////////
-/////////////////////////////////////////////////////////
-function welcome() {
-  $("#welcome_message").modal("show");
-}
-
-function help() {
-  $("#help_modal").modal("show");
-  var r2Audio = document.getElementById("r2Audio");
-  r2Audio.play();
-}
-
-function themeAudio() {
-  var starWarsTheme = document.getElementById("welcomeAudio");
-  starWarsTheme.play();
-
-  //found the below sound duration timefix on stack overflow.
-  setInterval(function() {});
-
-  starWarsTheme.addEventListener("timeupdate", function() {
-    var t = starWarsTheme.currentTime;
-    //this allows you to set how many seconds short the audio will play vs the real duration.
-    if (t > starWarsTheme.duration - 10) {
-      starWarsTheme.pause();
-      darthMusic();
-      //This alert gives you the time (in seconds) that the audio stopped.
-      // alert(t);
-    }
-
-    function darthMusic() {
-      darthVaderTheme = document.getElementById("darth-music");
-      darthVaderTheme.play();
-    }
-  });
-}
-welcome();
-
-$("#welcome-close").on("click", function() {
-  themeAudio();
-});
-
-$("#c3p0").on("click", function() {
-  help();
-});
-
-$("#r2d2").on("click", function() {
-  help();
-});
-
-/////////////////////////////////////////////////////
-///Global Variables, Prototypes, and Constructors////
 ////////////////////////////////////////////////////
-
-function character(name, att, cnt, hp, isDarkSide, shortname, imgUrl) {
-  this.name = name;
-  this.att = att;
-  this.cnt = cnt;
-  this.hp = hp;
-  this.isDarkSide = isDarkSide;
-  this.shortname = shortname;
-  this.imgUrl = imgUrl;
-}
-
-var obiwan = new character(
-  "Obi-Wan",
-  30,
-  50,
-  120,
-  false,
-  "obiwan",
-  "../img/OBIWANKENOBI.jpg"
-);
-
-var leia = new character(
-  "Princess Leia",
-  27,
-  53,
-  120,
-  false,
-  "leia",
-  "../img/princessleia.jpg"
-);
-
-var chewy = new character(
-  "Chewbacca",
-  32,
-  48,
-  120,
-  false,
-  "chewy",
-  "../img/CHEWBACCA.jpg"
-);
-
-var hansolo = new character(
-  "Han Solo",
-  25,
-  55,
-  120,
-  false,
-  "hansolo",
-  "../img/hansolo.jpg"
-);
-
-var luke = new character(
-  "Luke Skywalker",
-  40,
-  40,
-  120,
-  false,
-  "luke",
-  "../img/lukeskywalker.jpg"
-);
-
-var yoda = new character(
-  "Yoda",
-  50,
-  30,
-  120,
-  false,
-  "yoda",
-  "../img/lukeskywalker.jpg"
-);
-
-var stormtrooper = new character(
-  "Storm Trooper",
-  40,
-  40,
-  120,
-  true,
-  "stormtrooper",
-  "../img/stormtrooper.jpg"
-);
-var darthmaul = new character(
-  "Darth Maul",
-  30,
-  50,
-  120,
-  true,
-  "darthmaul",
-  "../img/darthmaul.jpg"
-);
-
-var darthvader = new character(
-  "Darth Vader",
-  60,
-  20,
-  120,
-  true,
-  "darthvader",
-  "../img/darthvader.jpg"
-);
-
-var bobafett = new character(
-  "Boba Fett",
-  45,
-  35,
-  120,
-  true,
-  "bobafett",
-  "../img/bobafett.jpg"
-);
-
-function characterCheck(player) {
-  console.log(player instanceof character);
-  console.log(player);
-}
-
+////////GLOBAL VARIABLES////////////////////////////
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+var gameOn = false; //controls game state
+var randomNums = 0; //the random integer chosen for the round
+var crystal1; //crystals 1-4
+var crystal2; //crystals 1-4
+var crystal3; //crystals 1-4
+var crystal4; //crystals 1-4
+var cpuBoxScore = 0; // variables to track cpu and user scores on baord.
+var userBoxScore = 0; // variables to track cpu and user scores on baord.
+var userScore = 0;
 /////////////////////////////////////////////////////
-/////////Object Properties TypeChecking//////////////
+////Functions////////////////////////////////////////
+/////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
 
-//Typechecking Global Variables
+//Got help finding this function on stack overflow.
+//https://stackoverflow.com/questions/17891173/how-to-efficiently-randomly-select-array-item-without-repeats
+function randomNoRepeats(array) {
+  //returns first element in array as a new array object in "copy"
+  var copy = array.slice(0);
+  return function() {
+    if (copy.length < 1) {
+      copy = array.slice(0);
+    }
+    var index = Math.floor(Math.random() * copy.length);
+    var item = copy[index];
+    copy.splice(index, 1);
+    return item;
+  };
+}
 
-// var numberControl = 1;
-// var booleanControl = false;
-// var stringControl = "";
-// var numsValid = false;
-// var boolValid = false;
-// var stringValid = false;
+//this array holds each of the image clases so that the images are random as well as the values
+//the code below sets the random ims when the page loads.
+var randomImgs = randomNoRepeats([
+  "crystal-1",
+  "crystal-2",
+  "crystal-3",
+  "crystal-4"
+]);
 
-// //Typechecking functions
-// function checkNums(character) {
-//   if (
-//     typeof numberControl === typeof character.att &&
-//     typeof number === typeof character.cnt &&
-//     typeof number === typeof character.hp
-//   ) {
-//     numsValid = true;
-//   } else {
-//     alert("Error! Numeric type check failed");
-//     console.log("numeric type check failed.");
-//   }
-// }
-
-// function checkBools(character) {
-//   if (typeof booleanControl === character.isDarkside) {
-//     boolValid = true;
-//   } else {
-//     alert("Error! Boolean type check failed.");
-//     console.log("Boolean type check failed.");
-//   }
-// }
-
-// function checkBools(character) {
-//   if (typeof booleanControl === character.name) {
-//     stringValid = true;
-//   } else {
-//     alert("Error! String type check failed.");
-//     console.log("String type check failed.");
-//   }
-// }
-
-// function characterCheck(player) {
-//   console.log(player instanceof character);
-//   console.log(player);
-// }
-
-// // var cCheckLength = charselect.length;
-// for (var i = 0; i < cCheckLength; i++) {
-//   console.log(charselect[i]);
-//   //Do something
-//   charname = charselect[i].name;
-
-//   characterCheck(charname);
-// }
-
-//////////////////////////////////////////////////////////
-///////Array Population / Vacation Functions ////////////
-////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+///page rendering///////////////////////////////////////
 ///////////////////////////////////////////////////////
-//Deliberately pushing jedis to lower indexes of array
-//Siths to upper indexes so that charselect function logic
-///can be based on this initialzed index
-///for example Jedis will be on 0-5
-///siths will be on 6-9
-var charselect = [
-  obiwan,
-  leia,
-  chewy,
-  hansolo,
-  luke,
-  yoda,
-  stormtrooper,
-  darthmaul,
-  darthvader,
-  bobafett
-];
+function renderPage() {
+  $("#cr1").addClass(randomImgs());
+  $("#cr2").addClass(randomImgs());
+  $("#cr3").addClass(randomImgs());
+  $("#cr4").addClass(randomImgs());
+  console.log("random images loaded");
+  $("#random-box").text(" press start game  to play");
+  $("#losses-count").html("<h2>CPU LOSSES: " + cpuBoxScore + "</h2>");
+  $("#win-count").html("<h2>PLAYER WINS: " + userBoxScore + "</h2>");
+  console.log("scoreboard drawn");
+}
+///////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 
-var enemyInBattle = [];
+//reveals all including crystals
+function reveal() {
+  $("#current-score-number").html(userScore);
+  $("#random-box").html("<h1>" + randomNums + "</h1>");
 
-var enemyField = [];
+  $("#losses-count").html("CPU LOSSES: ", cpuBoxScore);
+  $("#win-count").html("PLAYER WINS: ", userBoxScore);
+  $("#cr1Revealed").html("<h3>Crystal's value was: " + crystal1 + "</h3>");
+  $("#cr2Revealed").html("<h3>Crystal's value was: " + crystal2 + "</h3>");
+  $("#cr3Revealed").html("<h3>Crystal's value was: " + crystal3 + "</h3>");
+  $("#cr4Revealed").html("<h3>Crystal's value was: " + crystal4 + "</h3>");
+}
 
-var playerField = [];
+//Helps update scoreboard without revealing crystal values
+function revealPartial() {
+  $("#losses-count").html("CPU LOSSES: ", cpuBoxScore);
+  $("#win-count").html("PLAYER WINS: ", userBoxScore);
+  $("#current-score-number").html(userScore);
+  $("#random-box").html("<h1>" + randomNums + "</h1>");
+  $("#current-score-number").html(userScore);
+}
 
-///////////////////////////////
-//function  possibly `1used as part of restart
-function vacate(array1, array2) {
-  for (var i = 0; i < array1.length; i++) {
-    array2.push(array1[i]);
-    array1.splice(i, 1);
-    i--; //decrement i IF we remove an item
+//Neeeded help getting numbers within range.
+//source https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+///This function will add the value of the crystal to the user score.
+function addScore(crystal) {
+  revealPartial();
+  userScore += crystal;
+  console.log(userScore);
+  revealPartial();
+  winLogic();
+}
+
+//controls all crystal clicking
+function crystalClicks() {
+  if (userScore < randomNums) {
+    $("#current-score-number").html(userScore);
+    $("#cr1").click(function() {
+      addScore(crystal1);
+    });
+    $("#cr2").click(function() {
+      addScore(crystal2);
+    });
+    $("#cr3").click(function() {
+      addScore(crystal3);
+    });
+
+    $("#cr4").click(function() {
+      addScore(crystal4);
+    });
   }
 }
 
-/////////////////////////////////////////////////////
+///initialize all numbers
+function numberInit() {
+  $("#random-box").empty();
+  console.log("box instructions replaced");
+  console.log("game on function active after button press");
+
+  userScore = 0;
+  console.log("userscore intitialized to " + userScore);
+  $("#current-score-number").html(userScore);
+  randomNums = getRandomInt(19, 120);
+  $("#random-box").html("<h2> random number is: " + randomNums + "</h2>");
+
+  console.log("your random number is " + randomNums);
+  //sets random value between 1 and 12 for user.
+  crystal1 = Math.ceil(Math.random() * 12);
+
+  console.log("crystal1 is: " + crystal1);
+  //set and report crystal value for debug and cheating
+  crystal2 = Math.ceil(Math.random() * 12);
+
+  console.log("crystal2 is: " + crystal2);
+  //set and report crystal value for debug and cheating
+  crystal3 = Math.ceil(Math.random() * 12);
+
+  console.log("crystal3 is: " + crystal3);
+  //set and report crystal value for debug and cheating
+  crystal4 = Math.ceil(Math.random() * 12);
+
+  console.log("crystal4 is: " + crystal4);
+}
+
+function cutAudio() {
+  setInterval(function() {});
+
+  audioElement.addEventListener("timeupdate", function() {
+    var t = audioElement.currentTime;
+    //this allows you to set how many seconds short the audio will play vs the real duration.
+    if (t == audioElement.duration + 3) {
+      audioElement.empty();
+    }
+  });
+}
+function winAudio() {
+  var audioElement = document.createElement("audio");
+  audioElement.setAttribute("src", "../mp3/winHorn.mp3");
+  audioElement.setAttribute("id", "audio");
+  //audioElement.load()
+  $.get();
+  audioElement.addEventListener(
+    "load",
+    function() {
+      audioElement.play();
+    },
+    true
+  );
+  cutAudio();
+}
+
+function lossAudio() {
+  var audioElement = document.createElement("audio");
+  audioElement.setAttribute(
+    "src",
+    "../mp3/The Price is Right Losing Horn - Gaming Sound Effect (HD).mp3"
+  );
+  audioElement.setAttribute("id", "audio");
+  //audioElement.load()
+  $.get();
+  audioElement.addEventListener(
+    "load",
+    function() {
+      audioElement.play();
+    },
+    true
+  );
+
+  cutAudio();
+}
+
+function winLogic() {
+  if (userScore === randomNums) {
+    console.log("game conditions met");
+    cpuBoxScore++;
+    $("#congratulatory_message").modal("show");
+
+    reveal();
+
+    $(".close").click(function() {
+      prompt("Play Again?", gameStart());
+    });
+    gameOn = false;
+  } else if (randomNums < userScore) {
+    console.log("game conditions met");
+    userBoxScore++;
+
+    $("#loser_message").modal("show");
+    $("#lossAudio").play();
+    reveal();
+    $(".close").click(function() {
+      prompt("Play Again?", gameStart());
+    });
+  }
+}
+
+//this will render the score at 0 at the page load.
+//sorry if i get annoying with the annotation, but I'm trying to
+//make this so its human readable and more understandable to me
+// I'd like to rely on external sources more for syntax rather than
+//logic in the future.
+$("#current-score-number").html("<h1>" + userScore + "</h1>");
+//This function starts the game and changes the gameOn boolean once the game is finished.
+function gameStart() {
+  //initialize all numbers
+  //then set and report crystal value for debug and cheating
+  numberInit();
+
+  //Control Crystal Clicks which has a gamelogic function run each time
+  crystalClicks();
+}
+
+$(document).ready(function() {
+  renderPage();
+  $("#startbutton").click(function() {
+    gameStart();
+  });
+});
+
+///////////////////////////////////////////////////////////////////////////
+//Originally tried to psuedocode the below and assign classes this way using the some keyword.
+//Got a little stuck.
+//VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+
+//pick a random image using array with bracket notation randomImgs[i]
+
+//check if random image has been selected in array imgPicked
+
+//if it was set imgPicked to true
+
+//If imgPicked = true, pick again
+
+//otherwise push string to imgsPicked
+
+// function checkElement(i) {
+//   for (x = 0; x <= randomImgs.length; x++)
+//var id = imgPicked.length + 1;
+//tried to use some function to do the same as above. would like a little help with this one.
+//   var found = imgsPicked.some(function(i) {
+//     ;
+//   });
+//   if (!found) {
+//     imgsPicked.push();
+//   }
+// }
+
+// function addElement() {}
+// function imgRender() {
+//   i = Math.floor(Math.random() * 4);
+// }

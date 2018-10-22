@@ -1,0 +1,74 @@
+
+// function characterCheck(player) {
+//   console.log(player instanceof character);
+//   console.log(player);
+// }
+
+/////////////////////////////////////////////////////
+/////////Object Properties TypeChecking//////////////
+/////////////////////////////////////////////////////
+
+//Typechecking Global Variables
+
+// var numberControl = 1;
+// var booleanControl = false;
+// var stringControl = "";
+// var numsValid = false;
+// var boolValid = false;
+// var stringValid = false;
+
+// //Typechecking functions
+// function checkNums(character) {
+//   if (
+//     typeof numberControl === typeof character.att &&
+//     typeof number === typeof character.cnt &&
+//     typeof number === typeof character.hp
+//   ) {
+//     numsValid = true;
+//   } else {
+//     alert("Error! Numeric type check failed");
+//     console.log("numeric type check failed.");
+//   }
+// }
+
+// function checkBools(character) {
+//   if (typeof booleanControl === character.isDarkside) {
+//     boolValid = true;
+//   } else {
+//     alert("Error! Boolean type check failed.");
+//     console.log("Boolean type check failed.");
+//   }
+// }
+
+// function checkBools(character) {
+//   if (typeof booleanControl === character.name) {
+//     stringValid = true;
+//   } else {
+//     alert("Error! String type check failed.");
+//     console.log("String type check failed.");
+//   }
+// }
+
+// function characterCheck(player) {
+//   console.log(player instanceof character);
+//   console.log(player);
+// }
+
+// // var cCheckLength = charSelect.length;
+// for (var i = 0; i < cCheckLength; i++) {
+//   console.log(charSelect[i]);
+//   //Do something
+//   charname = charSelect[i].name;
+
+//   characterCheck(charname);
+// }
+
+//////////////////////////////////////////////////////////
+///////Array Population / Vacation Functions ////////////
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//Deliberately pushing jedis to lower indexes of array
+//Siths to upper indexes so that characterSelect function logic
+///can be based on this initialzed index
+///for example Jedis will be on 0-5
+///siths will be on 6-9

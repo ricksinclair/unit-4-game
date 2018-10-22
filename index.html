@@ -1,83 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Star Wars RPG</title>
+    <title>jQuery Assignment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
 
 </head>
 
 <body>
-    <!-- MODAL MAGIC -->
-    <div class="modal modal-lg" tabindex="-1" role="dialog" id="welcome_message">
-        <audio id="welcomeAudio">
-            <source src="assets/mp3/Star Wars short intro.mp3" type="audio/mp3" />
+    <hr />
+    <div class="modal" tabindex="-1" role="dialog" id="congratulatory_message">
+        <audio id="winAudio">
+            <source src="assets/mp3/winHorn.mp3" type="audio/mp3" />
         </audio>
-        <audio id="welcome_modal_close_audio">
-            <source src="assets/mp3/Star Wars Blaster Sound Effect.mp3" type="audio/mp3" />
-        </audio>
-        <audio id="darth-music">
-            <source src="assets/mp3/Star Wars- The Imperial March (Darth Vader's Theme).mp3" type="audio/mp3" />
-        </audio>
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Welcome To The Star Wars RPG! </h5>
-
+                    <h5 class="modal-title">You are a clairevoyant!</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2>Instructions:</h2>
-                    <p>Pick a character and then the cpu will randomly select 4 other characters for you to join into
-                        battle.</p>
-                    <p>You will then need to use your reasoning and logic skills to attack in an order that will ensure
-                        victory. </p>
-                    <p>Good luck, and may the force be with you!</p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ycCAHYvAUl4" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen id="welcomevideo"></iframe>
-
+                    <p>You successfully completed this challenge.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="welcome-close">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div class="modal modal-lg" tabindex="-1" role="dialog" id="help_modal">
-        <audio id="r2Audio">
-            <source src="assets/mp3/Star Wars short intro.mp3" type="audio/mp3" />
+    <div class="modal" tabindex="-1" role="dialog" id="loser_message">
+        <audio id="lossAudio">
+            <source src="assets/mp3/The Price is Right Losing Horn - Gaming Sound Effect (HD).mp3" type="audio/mp3" />
         </audio>
-        <audio id="welcome_modal_close_audio">
-            <source src="assets/mp3/Star Wars Blaster Sound Effect.mp3" type="audio/mp3" />
-        </audio>
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Welcome To The Star Wars RPG! </h5>
+                    <h5 class="modal-title">Guess there's always next time!</h5>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h2>Instructions:</h2>
-                    <p>Pick a character and then the cpu will randomly select 4 other characters for you to join into
-                        battle.</p>
-                    <p>You will then need to use your reasoning and logic skills to attack in an order that will ensure
-                        victory. </p>
-                    <p>Good luck, and may the force be with you!</p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/ycCAHYvAUl4" frameborder="0"
-                        allow="autoplay; encrypted-media" allowfullscreen id="welcomevideo"></iframe>
-
+                    <p>Tough luck buddy. I'm sorry, but ya lost! Better luck next time.</p>
+                    <p id="solution"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -86,34 +58,86 @@
         </div>
     </div>
 
+    <section class="header">
+        <div class="row">
+            <div class="col-3 title-element">
+                <h1>CrystalsCollector!</h1>
+            </div>
+            <div class="col-9">
+
+            </div>
+        </div>
+
+        <br />
 
 
+        <div class="row">
+            <div class=" col-5 description">
+                <p>You will be given a random number at the start of the game.</p>
+                <p>There are four crystals below. By the clikcing on a crystal you will add a specific amount to your
+                    total
+                    score.
+                </p>
+                <p>You win the game by matching your total score to the random number. You lose the game if your total
+                    score
+                    goes above the random number.
+                </p>
 
+                <p>The value of each crystal is hidden from you until you click on it.</p>
+                <p>Each time when the game starts, the game will change the value of each crystal.</p>
+                <button class="btn btn-primary" id="startbutton">Start Game</button>
+            </div>
 
+            <div class="col-7">
+            </div>
+        </div>
+    </section>
 
+    <section class="main-game">
+        <div class="row">
 
+            <div id="random-box" class="random-box col-4">
 
+            </div>
 
+            <div class="win-loss-box col-3">
+                <p id="win-count"></p>
 
+                <p id="losses-count"></p>
+            </div>
+            <div class="col-5"></div>
+        </div>
+        <div class="crystal-box row">
+            <div id="cr1" class="col-2" alt="power crystal"></div>
+            <div id="cr2" class="col-2" alt="power crystal"></div>
+            <div id="cr3" class="col-2" alt="power crystal"></div>
+            <div id="cr4" class="col-2" alt="power crystal"></div>
+            <div class="col-4"></div>
+        </div>
 
+        <div class="crystal-box row">
+            <div id="cr1Revealed" class="col-2" alt="power crystal value"></div>
+            <div id="cr2Revealed" class="col-2" alt="power crystal value"></div>
+            <div id="cr3Revealed" class="col-2" alt="power crystal value"></div>
+            <div id="cr4Revealed" class="col-2" alt="power crystal value"></div>
+            <div class="col-4"></div>
+        </div>
 
+        <div class="current-score col-5">
+            <div class="row">
+                <p>Your current score is:</p>
 
+            </div>
+            <div class="row">
+                <div id="current-score-number" class="col-3">
 
+                </div>
+                <div class="col-9">
 
-
-    <div id="helperBots">
-        <h1>Welcome to The Star Wars Game</h1>
-        <h2>This is a div for testing purposes</h2>
-        <img class="helper" src="assets/img/C3PO.jpg" id="c3p0">
-        <img class="helper" src="assets/img/R2D2.jpg" id="r2d2">
-    </div>
-
-
-
-
-
-
-
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -121,7 +145,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <script src="assets/js/game.js"></script>
-
 </body>
 
 </html>

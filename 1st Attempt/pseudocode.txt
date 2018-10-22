@@ -23,8 +23,8 @@ UX
 
 
 
-1. Create a character object prototype that allows me to quickly assign values to each of the 10 playable characters.
-2. Allow these objects to be moved between a character select object, a enemy field object, a battlefield object 
+1. Create a character object prototype that allows me to quickly assign values to each of the 10 playable characters. [DONE]
+2. Allow these objects to be moved between a character select object, a enemy field object, a battlefield object[DONE]
 (for active enemy), and graveyard object. 
 3. Each  field/container object should have a corresponding div/row with associated id
 4. Adding each field object should change styling to indicate place in game (waiting to fight, in battle, etc).
