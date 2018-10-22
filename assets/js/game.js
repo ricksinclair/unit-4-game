@@ -45,14 +45,15 @@ var randomImgs = randomNoRepeats([
 ///page rendering///////////////////////////////////////
 ///////////////////////////////////////////////////////
 function renderPage() {
+  showCrystals();
   $("#cr1").addClass(randomImgs());
   $("#cr2").addClass(randomImgs());
   $("#cr3").addClass(randomImgs());
   $("#cr4").addClass(randomImgs());
   console.log("random images loaded");
   $("#random-box").text(" press start game  to play");
-  $("#losses-count").html("<h2>CPU LOSSES: " + cpuBoxScore + "</h2>");
-  $("#win-count").html("<h2>PLAYER WINS: " + userBoxScore + "</h2>");
+  $("#losses-count").text("CPU LOSSES: " + cpuBoxScore);
+  $("#win-count").text("PLAYER WINS: " + userBoxScore);
   console.log("scoreboard drawn");
 }
 ///////////////////////////////////////////////////////
@@ -61,11 +62,15 @@ function renderPage() {
 
 //reveals all including crystals
 function reveal() {
+  $("#losses-count").empty();
+  $("#win-count").empty();
+  $("#current-score-number").empty();
+  $("#random-box").empty();
   $("#current-score-number").html(userScore);
   $("#random-box").html("<h1>" + randomNums + "</h1>");
 
-  $("#losses-count").html("CPU LOSSES: ", cpuBoxScore);
-  $("#win-count").html("PLAYER WINS: ", userBoxScore);
+  $("#losses-count").text("CPU LOSSES: " + cpuBoxScore);
+  $("#win-count").text("PLAYER WINS: " + userBoxScore);
   $("#cr1Revealed").html("<h3>Crystal's value was: " + crystal1 + "</h3>");
   $("#cr2Revealed").html("<h3>Crystal's value was: " + crystal2 + "</h3>");
   $("#cr3Revealed").html("<h3>Crystal's value was: " + crystal3 + "</h3>");
@@ -74,11 +79,14 @@ function reveal() {
 
 //Helps update scoreboard without revealing crystal values
 function revealPartial() {
-  $("#losses-count").html("CPU LOSSES: ", cpuBoxScore);
-  $("#win-count").html("PLAYER WINS: ", userBoxScore);
-  $("#current-score-number").html(userScore);
+  $("#losses-count").empty();
+  $("#win-count").empty();
+  $("#current-score-number").empty();
+  $("#random-box").empty();
+  $("#losses-count").text("CPU LOSSES: " + cpuBoxScore);
+  $("#win-count").text("PLAYER WINS: " + userBoxScore);
+  $("#current-score-number").html("<h1>" + userScore + "</h1>");
   $("#random-box").html("<h1>" + randomNums + "</h1>");
-  $("#current-score-number").html(userScore);
 }
 
 //Neeeded help getting numbers within range.
@@ -91,6 +99,7 @@ function getRandomInt(min, max) {
 
 ///This function will add the value of the crystal to the user score.
 function addScore(crystal) {
+  console.log("click!");
   revealPartial();
   userScore += crystal;
   console.log(userScore);
@@ -100,7 +109,7 @@ function addScore(crystal) {
 
 //controls all crystal clicking
 function crystalClicks() {
-  if (userScore < randomNums) {
+  if (gameOn) {
     $("#current-score-number").html(userScore);
     $("#cr1").click(function() {
       addScore(crystal1);
@@ -123,7 +132,8 @@ function numberInit() {
   $("#random-box").empty();
   console.log("box instructions replaced");
   console.log("game on function active after button press");
-
+  revealPartial();
+  gameOn = true;
   userScore = 0;
   console.log("userscore intitialized to " + userScore);
   $("#current-score-number").html(userScore);
@@ -148,76 +158,50 @@ function numberInit() {
 
   console.log("crystal4 is: " + crystal4);
 }
-
-function cutAudio() {
-  setInterval(function() {});
-
-  audioElement.addEventListener("timeupdate", function() {
-    var t = audioElement.currentTime;
-    //this allows you to set how many seconds short the audio will play vs the real duration.
-    if (t == audioElement.duration + 3) {
-      audioElement.empty();
-    }
-  });
-}
-function winAudio() {
-  var audioElement = document.createElement("audio");
-  audioElement.setAttribute("src", "../mp3/winHorn.mp3");
-  audioElement.setAttribute("id", "audio");
-  //audioElement.load()
-  $.get();
-  audioElement.addEventListener(
-    "load",
-    function() {
-      audioElement.play();
-    },
-    true
-  );
-  cutAudio();
+function hideCrystals() {
+  $("#cr1").toggle(false);
+  $("#cr2").toggle(false);
+  $("#cr3").toggle(false);
+  $("#cr4").toggle(false);
 }
 
-function lossAudio() {
-  var audioElement = document.createElement("audio");
-  audioElement.setAttribute(
-    "src",
-    "../mp3/The Price is Right Losing Horn - Gaming Sound Effect (HD).mp3"
-  );
-  audioElement.setAttribute("id", "audio");
-  //audioElement.load()
-  $.get();
-  audioElement.addEventListener(
-    "load",
-    function() {
-      audioElement.play();
-    },
-    true
-  );
+function showCrystals() {
+  $("#cr1").toggle(true);
+  $("#cr2").toggle(true);
+  $("#cr3").toggle(true);
+  $("#cr4").toggle(true);
+}
 
-  cutAudio();
+function hideSolution() {
+  $("#cr1Revealed").empty();
+  $("#cr2Revealed").empty();
+  $("#cr3Revealed").empty();
+  $("#cr4Revealed").empty();
 }
 
 function winLogic() {
   if (userScore === randomNums) {
-    console.log("game conditions met");
     cpuBoxScore++;
+    reveal();
+    console.log("game conditions met");
+    hideCrystals();
+    gameOn = false;
     $("#congratulatory_message").modal("show");
+    //winAudio();
 
+    console.log("gameOn=false");
+  } else if (randomNums < userScore && randomNums !== userScore) {
+    userBoxScore++;
     reveal();
 
-    $(".close").click(function() {
-      prompt("Play Again?", gameStart());
-    });
-    gameOn = false;
-  } else if (randomNums < userScore) {
     console.log("game conditions met");
-    userBoxScore++;
+    hideCrystals();
+    gameOn = false;
 
     $("#loser_message").modal("show");
-    $("#lossAudio").play();
-    reveal();
-    $(".close").click(function() {
-      prompt("Play Again?", gameStart());
-    });
+    //   lossAudio();
+
+    console.log("gameOn=false");
   }
 }
 
@@ -231,19 +215,19 @@ $("#current-score-number").html("<h1>" + userScore + "</h1>");
 function gameStart() {
   //initialize all numbers
   //then set and report crystal value for debug and cheating
+  hideSolution();
   numberInit();
-
+  showCrystals();
   //Control Crystal Clicks which has a gamelogic function run each time
   crystalClicks();
 }
 
-$(document).ready(function() {
-  renderPage();
-  $("#startbutton").click(function() {
-    gameStart();
-  });
+renderPage();
+$("#startbutton").click(function() {
+  gameStart();
 });
 
+////////////////////////misc deletes//////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 //Originally tried to psuedocode the below and assign classes this way using the some keyword.
 //Got a little stuck.
@@ -275,3 +259,50 @@ $(document).ready(function() {
 // function imgRender() {
 //   i = Math.floor(Math.random() * 4);
 // }
+//
+
+/*
+function winAudio() {
+  var audioElement = [$("<audio></audio>")];
+  audioElement[0].setAttribute("src", "../mp3/winHorn.mp3");
+  audioElement[0].setAttribute("id", "audio");
+  //found audio fix here https://stackoverflow.com/questions/8489710/play-an-audio-file-using-jquery-when-a-button-i
+  audioElement[0].play();
+
+  console.log("audio element loaded");
+
+  cutAudio();
+  console.log("audio element destroyed");
+}
+
+function lossAudio() {
+  var audioElement = [document.createElement("audio")];
+  audioElement[0].setAttribute(
+    "src",
+    "../mp3/The Price is Right Losing Horn - Gaming Sound Effect (HD).mp3"
+  );
+  audioElement[0].setAttribute("id", "audio");
+  console.log("audio element created");
+  //audioElement.load()
+
+  audioElement[0].play();
+
+  console.log("audio element loaded");
+
+  cutAudio();
+  console.log("audio element destroyed");
+}
+*/
+/*
+function cutAudio() {
+  setInterval(function() {});
+
+  audioElement.addEventListener("timeupdate", function() {
+    var t = audioElement.currentTime;
+    //this allows you to set how many seconds short the audio will play vs the real duration.
+    if (t == audioElement.duration + 3) {
+      audioElement.empty();
+    }
+  });
+}
+*/

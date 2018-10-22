@@ -31,26 +31,34 @@ body {
 }
 
 .crystal-1 {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   background-image: url("../img/crystal1.jpg");
   background-size: cover;
 }
 .crystal-2 {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   background-image: url("../img/crystal2.jpg");
   background-size: cover;
 }
 .crystal-3 {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   background-image: url("../img/crystal3.jpg");
   background-size: cover;
 }
 .crystal-4 {
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   background-image: url("../img/crystal4.jpg");
   background-size: cover;
+}
+
+.ghostCrystals {
+  border-style: solid;
+  border: black;
+  border-width: 3px;
+  background-color: teal;
+  color: white;
 }
