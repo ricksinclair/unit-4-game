@@ -60,7 +60,7 @@ function renderPage() {
 ////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 
-//reveals all including crystals
+//reveals all including crystal values
 function reveal() {
   $("#losses-count").empty();
   $("#win-count").empty();
@@ -181,7 +181,7 @@ function hideSolution() {
 
 function winLogic() {
   if (userScore === randomNums) {
-    cpuBoxScore++;
+    userBoxScore++;
     reveal();
     console.log("game conditions met");
     hideCrystals();
@@ -191,7 +191,7 @@ function winLogic() {
 
     console.log("gameOn=false");
   } else if (randomNums < userScore && randomNums !== userScore) {
-    userBoxScore++;
+    cpuBoxScore++;
     reveal();
 
     console.log("game conditions met");
